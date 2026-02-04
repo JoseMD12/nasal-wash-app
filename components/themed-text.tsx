@@ -6,6 +6,7 @@ export type ThemedTextProps = TextProps & {
   lightColor?: string;
   darkColor?: string;
   type?: 'default' | 'title' | 'defaultSemiBold' | 'subtitle' | 'link';
+  className?: string; // Add className prop
 };
 
 export function ThemedText({
@@ -13,12 +14,14 @@ export function ThemedText({
   lightColor,
   darkColor,
   type = 'default',
+  className, // Destructure className
   ...rest
 }: ThemedTextProps) {
   const color = useThemeColor({ light: lightColor, dark: darkColor }, 'text');
 
   return (
     <Text
+      className={className} // Apply className
       style={[
         { color },
         type === 'default' ? styles.default : undefined,
