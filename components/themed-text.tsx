@@ -1,63 +1,39 @@
-import { StyleSheet, Text, type TextProps } from 'react-native';
-
-import { useThemeColor } from '@/hooks/use-theme-color';
+import { Text, type TextProps } from "react-native";
 
 export type ThemedTextProps = TextProps & {
-  lightColor?: string;
-  darkColor?: string;
-  type?: 'default' | 'title' | 'defaultSemiBold' | 'subtitle' | 'link';
-  className?: string; // Add className prop
+	type?: TextType;
+	className?: string;
 };
 
-export function ThemedText({
-  style,
-  lightColor,
-  darkColor,
-  type = 'default',
-  className, // Destructure className
-  ...rest
-}: ThemedTextProps) {
-  const color = useThemeColor({ light: lightColor, dark: darkColor }, 'text');
+export function ThemedText({ className, type, ...rest }: ThemedTextProps) {
+	const defaultClasses = "text-base";
 
-  return (
-    <Text
-      className={className} // Apply className
-      style={[
-        { color },
-        type === 'default' ? styles.default : undefined,
-        type === 'title' ? styles.title : undefined,
-        type === 'defaultSemiBold' ? styles.defaultSemiBold : undefined,
-        type === 'subtitle' ? styles.subtitle : undefined,
-        type === 'link' ? styles.link : undefined,
-        style,
-      ]}
-      {...rest}
-    />
-  );
+	let typeSpecificClasses = "";
+	switch (type) {
+		case TextType.TITLE:
+			typeSpecificClasses = "text-xl font-bold";
+			break;
+		case TextType.SUBTITLE:
+			typeSpecificClasses = "text-lg font-semibold";
+			break;
+		case TextType.DEFAULT_SEMI_BOLD:
+			typeSpecificClasses = "font-semibold";
+			break;
+		case TextType.LINK:
+			typeSpecificClasses = "text-sky-700";
+			break;
+		default:
+			break;
+	}
+
+	const combinedClassName = `${defaultClasses} ${typeSpecificClasses} ${className || ""}`;
+
+	return <Text className={combinedClassName.trim()} {...rest} />;
 }
 
-const styles = StyleSheet.create({
-  default: {
-    fontSize: 16,
-    lineHeight: 24,
-  },
-  defaultSemiBold: {
-    fontSize: 16,
-    lineHeight: 24,
-    fontWeight: '600',
-  },
-  title: {
-    fontSize: 32,
-    fontWeight: 'bold',
-    lineHeight: 32,
-  },
-  subtitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  link: {
-    lineHeight: 30,
-    fontSize: 16,
-    color: '#0a7ea4',
-  },
-});
+export enum TextType {
+	TITLE,
+	DEFAULT_SEMI_BOLD,
+	SUBTITLE,
+	LINK,
+}

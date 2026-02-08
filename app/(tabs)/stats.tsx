@@ -1,44 +1,25 @@
-import React from 'react';
-import { StyleSheet } from 'react-native';
+import React from "react";
 
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
+import { TextType, ThemedText } from "@/components/themed-text";
+import { ThemedView } from "@/components/themed-view";
 
 export default function StatsScreen() {
-  return (
-    <ThemedView style={styles.container}>
-      <ThemedText type="title">Statistics</ThemedText>
-      <ThemedView style={styles.statContainer}>
-        <ThemedText style={styles.statLabel}>Washes per week:</ThemedText>
-        <ThemedText style={styles.statValue}>5</ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.statContainer}>
-        <ThemedText style={styles.statLabel}>Average duration:</ThemedText>
-        <ThemedText style={styles.statValue}>30s</ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.statContainer}>
-        <ThemedText style={styles.statLabel}>Longest streak:</ThemedText>
-        <ThemedText style={styles.statValue}>10 days</ThemedText>
-      </ThemedView>
-    </ThemedView>
-  );
+	return (
+		<ThemedView className='flex-1 items-center justify-center bg-red-600'>
+			<ThemedText type={TextType.TITLE}>Statistics</ThemedText>
+			<ThemedView className='mt-5 items-center'>
+				<ThemedText className='text-lg'>Washes per week:</ThemedText>
+				<ThemedText className='text-2xl font-bold'>5</ThemedText>
+			</ThemedView>
+			<ThemedView className='mt-5 items-center'>
+				<ThemedText className='text-lg'>Average duration:</ThemedText>
+				<ThemedText className='text-2xl font-bold'>30s</ThemedText>
+			</ThemedView>
+			<ThemedView className='mt-5 items-center'>
+				<ThemedText className='text-lg'>Longest streak:</ThemedText>
+				<ThemedText className='text-2xl font-bold'>10 days</ThemedText>
+			</ThemedView>
+		</ThemedView>
+	);
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  statContainer: {
-    marginTop: 20,
-    alignItems: 'center',
-  },
-  statLabel: {
-    fontSize: 18,
-  },
-  statValue: {
-    fontSize: 24,
-    fontWeight: 'bold',
-  },
-});
