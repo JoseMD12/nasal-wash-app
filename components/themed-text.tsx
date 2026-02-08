@@ -1,4 +1,5 @@
 import { Text, type TextProps } from "react-native";
+import { cn } from "@/lib/utils";
 
 export type ThemedTextProps = TextProps & {
 	type?: TextType;
@@ -26,9 +27,9 @@ export function ThemedText({ className, type, ...rest }: ThemedTextProps) {
 			break;
 	}
 
-	const combinedClassName = `${defaultClasses} ${typeSpecificClasses} ${className || ""}`;
+	const combinedClassName = cn(defaultClasses, typeSpecificClasses, className);
 
-	return <Text className={combinedClassName.trim()} {...rest} />;
+	return <Text className={combinedClassName} {...rest} />;
 }
 
 export enum TextType {

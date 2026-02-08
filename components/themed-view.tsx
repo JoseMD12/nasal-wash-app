@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utils";
 import { View, type ViewProps } from "react-native";
 
 export type ThemedViewProps = ViewProps & {
@@ -5,9 +6,9 @@ export type ThemedViewProps = ViewProps & {
 };
 
 export function ThemedView({ className, ...rest }: ThemedViewProps) {
-	const defaultClasses = " ";
+	const defaultClasses = "bg-stone-400";
 
-	const combinedClassName = `${defaultClasses} ${className || ""}`;
+	const combinedClassName = cn(className, defaultClasses);
 
-	return <View className={combinedClassName.trim()} {...rest} />;
+	return <View className={combinedClassName} {...rest} />;
 }
