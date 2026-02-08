@@ -11,6 +11,7 @@ yarn-debug.log*
 dist/
 web-build/
 expo-env.d.ts
+nativewind-env.d.ts
 
 # Mobile Build Artifacts (Caso você rode 'npx expo prebuild' no futuro)
 # Android
